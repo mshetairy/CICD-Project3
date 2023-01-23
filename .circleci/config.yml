@@ -223,8 +223,7 @@ jobs:
       - destroy-environment    
 
   run-migrations:
-    docker:
-      - image: cimg/node:14.20
+    executor: node
     steps:
       - checkout
       - install_awscli
@@ -235,8 +234,6 @@ jobs:
           name: Run Migrations
           command: |
             cd backend
-            npm install
-            npm audit fix --force
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
