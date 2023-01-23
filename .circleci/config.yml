@@ -224,7 +224,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/node:14.20
     steps:
       - checkout
       - install_awscli
@@ -236,7 +236,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix
+            npm audit fix --force
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
