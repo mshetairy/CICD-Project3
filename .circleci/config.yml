@@ -73,7 +73,7 @@ commands:
 jobs:
   build-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -90,7 +90,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -107,7 +107,7 @@ jobs:
 
   test-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -121,7 +121,7 @@ jobs:
 
   test-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -135,7 +135,7 @@ jobs:
 
   scan-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -151,7 +151,7 @@ jobs:
 
   scan-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.20
     steps:
       - checkout
       - restore_cache:
@@ -167,10 +167,10 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli
     steps:
       - checkout
-      - install_awscli
+      # - install_awscli
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -204,10 +204,10 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli
     steps:
       - checkout
-      - install_awscli
+      # - install_awscli
       - install_ansible
       - add_ssh_keys:
           fingerprints:
@@ -253,11 +253,11 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:14.20
     steps:
       - checkout
       - install_awscli
-      - install_nodejs
+      # - install_nodejs
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -286,12 +286,12 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:14.20
     steps:
       - checkout
       - install_awscli
       - install_ansible
-      - install_nodejs
+      # - install_nodejs
       - add_ssh_keys:
           fingerprints:
             - "25:d8:8e:51:98:ec:a8:92:bd:d5:26:32:8a:8b:fa:53"
