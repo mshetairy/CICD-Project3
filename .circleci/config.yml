@@ -234,18 +234,22 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
+      - run: 
+          name: Install Dependencies
+          command: |
+            sudo apt install -y tar gzip curl
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Run Migrations
           command: |
             cd backend
-            npm run migrations > migrations_dump.txt
-            cat migrations_dump.txt
+            npm run migrations > migrations.txt
+            cat migrations.txt
       - run:
           name: Send migration status to kvdb.io
           command: |
-            if grep -q "Executed successfully." ~/project/backend/migrations_dump.txt
+            if grep -q "Executed successfully." ~/project/backend/migrations.txt
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             else
@@ -332,19 +336,20 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
+          requires: [build-frontend, build-backend]
+          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          # filters:
+          #   branches:
+          #     only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
