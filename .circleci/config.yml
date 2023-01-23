@@ -3,10 +3,10 @@ version: 2.1
 executors:
   node:
     docker:
-      - image: circleci/node:14.20
+      - image: cimg/node:14.20
   python:
     docker:
-      - image: python:3.9.0-alpine
+      - image: cimg/python:3.10
   aws:
     docker:
       - image: amazon/aws-cli
@@ -210,7 +210,7 @@ jobs:
       - destroy-environment
 
   configure-infrastructure:
-    executor: base
+    executor: python
     steps:
       - checkout
       - install_awscli
@@ -255,11 +255,11 @@ jobs:
       - revert-migrations
 
   deploy-frontend:
-    executor: node
+    executor: python
     steps:
       - checkout
       - install_awscli
-      # - install_nodejs
+      - install_nodejs
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -287,12 +287,12 @@ jobs:
       - revert-migrations
 
   deploy-backend:
-    executor: node
+    executor: python
     steps:
       - checkout
       - install_awscli
       - install_ansible
-      # - install_nodejs
+      - install_nodejs
       - add_ssh_keys:
           fingerprints:
             - "25:d8:8e:51:98:ec:a8:92:bd:d5:26:32:8a:8b:fa:53"
