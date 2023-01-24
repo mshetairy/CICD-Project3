@@ -131,7 +131,7 @@ jobs:
           command: |
              cd frontend
              npm install
-             npm test
+             npm run test
 
   test-backend:
     executor: node
@@ -144,7 +144,7 @@ jobs:
           command: |
              cd backend
              npm install
-             npm test
+             npm run test
 
   scan-frontend:
     executor: node
@@ -280,7 +280,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - restore_cache:
-          keys: [backend-build]
+          keys: [frontend-build]
       - run:
           name: Install dependencies
           command: |
@@ -333,7 +333,7 @@ jobs:
             npm run build
             tar -czf artifact.tar.gz dist/* package*
             cd ..
-            cp backend/artifact.tar.gz ~/project/.circleci/ansible/roles/deploy/files/
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files/
       - run:
           name: Deploy backend
           command: |
@@ -371,7 +371,7 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
+            FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com/#/employees
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
                 exit 0
