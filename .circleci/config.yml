@@ -77,11 +77,14 @@ commands:
           when: on_fail
           command: |
             SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
-            if (( $SUCCESS == 1 ));
-            then
-              cd ~/project/backend
-              npm install
-              npm run migration:revert
+            if ["$SUCCESS" != "Not Found"];
+            then 
+              if (( $SUCCESS == 1 ));
+              then
+                cd ~/project/backend
+                npm install
+                npm run migration:revert
+              fi
             fi
 
 jobs:
@@ -238,12 +241,22 @@ jobs:
           name: Install Dependencies
           command: |
             sudo apt install -y tar gzip curl
-      - restore_cache:
-          keys: [backend-build]
+      # - restore_cache:
+      #     keys: [backend-build]
       - run:
           name: Run Migrations
           command: |
             cd backend
+            echo NODE_ENV=production >> .env
+            echo TYPEORM_CONNECTION=postgres >> .env
+            echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> .env
+            echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity{.ts,.js} >> .env
+            echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> .env
+            echo TYPEORM_HOST=udapeople-db.c7d9qifzx53g.us-east-1.rds.amazonaws.com >> .env
+            echo TYPEORM_PORT=5432 >> .env
+            echo TYPEORM_USERNAME=postgres >> .env
+            echo TYPEORM_PASSWORD=ZFkzPvw7cyRCWkFwsWhY >> .env
+            echo TYPEORM_DATABASE=glee >> .env
             npm run migrations > migrations.txt
             cat migrations.txt
       - run:
