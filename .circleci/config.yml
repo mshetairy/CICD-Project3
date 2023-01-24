@@ -232,7 +232,7 @@ jobs:
       - destroy-environment    
 
   run-migrations:
-    executor: node
+    executor: python
     steps:
       - checkout
       - install_awscli
@@ -241,8 +241,8 @@ jobs:
           name: Install Dependencies
           command: |
             sudo apt install -y tar gzip curl
-      # - restore_cache:
-      #     keys: [backend-build]
+      - restore_cache:
+          keys: [backend-build]
       - run:
           name: Run Migrations
           command: |
