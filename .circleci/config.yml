@@ -257,6 +257,7 @@ jobs:
             echo TYPEORM_USERNAME=postgres >> .env
             echo TYPEORM_PASSWORD=ZFkzPvw7cyRCWkFwsWhY >> .env
             echo TYPEORM_DATABASE=glee >> .env
+            npm install 
             npm run migrations > migrations.txt
             cat migrations.txt
       - run:
@@ -300,6 +301,7 @@ jobs:
           command: |
             export NODE_ENV=production
             cd frontend
+            npm install
             npm run build
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment    
