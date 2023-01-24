@@ -279,8 +279,8 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
 
-            export API_URL="http://${BACKEND_PUBLIC_IP}:3030"
-            echo "${API_URL}"
+            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+            cat frontend/.env"
       - run:
           name: Deploy frontend objects
           command: |
@@ -297,13 +297,13 @@ jobs:
       - install_awscli
       - install_ansible
       - install_nodejs
+      - restore_cache:
+          keys: [backend-build]
       - add_ssh_keys:
           fingerprints:
             - "25:d8:8e:51:98:ec:a8:92:bd:d5:26:32:8a:8b:fa:53"
       - attach_workspace:
           at: ~/
-      - restore_cache:
-          keys: [backend-build]
       - run:
           name: Install dependencies
           command: |
