@@ -1,5 +1,5 @@
 1. [URL01](https://github.com/mshetairy/CICD-Project3)
-2. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-3. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
-4. Public URLs to deployed application back-end in EC2 [URL04]
-5. Public URL to your Prometheus Server [URL05]
+2. [URL02](http://udapeople-3d854ee.s3-website-us-east-1.amazonaws.com)
+3. [URL03](http://d3cgt9t2ar9fot.cloudfront.net)
+4. [URL04](ec2-34-196-138-58.compute-1.amazonaws.com)
+5. [URL05](ec2-52-91-126-193.compute-1.amazonaws.com)

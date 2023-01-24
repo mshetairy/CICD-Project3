@@ -23,11 +23,11 @@ For your submission, please submit the following:
 
 - A text file named `urls.txt` including:
   1. Public Url to GitHub repository (not private) [URL01](https://github.com/mshetairy/CICD-Project3)
-  2. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-  3. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
-  4. Public URLs to deployed application back-end in EC2 [URL04]
-  5. Public URL to your Prometheus Server [URL05]
-- Your screenshots in JPG or PNG format, named using the screenshot number listed in the instructions. These screenshots should be included in your code repository in the root folder.
+  2. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02](http://udapeople-3d854ee.s3-website-us-east-1.amazonaws.com)
+  3. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03](http://d3cgt9t2ar9fot.cloudfront.net)
+  4. Public URLs to deployed application back-end in EC2 [URL04](ec2-34-196-138-58.compute-1.amazonaws.com)
+  5. Public URL to your Prometheus Server [URL05](ec2-52-91-126-193.compute-1.amazonaws.com)
+- Screenshots of various project stages are found inder [/Screenshots](Screenshots)
   1. Job failed because of compile errors. [SCREENSHOT01]
   2. Job failed because of unit tests. [SCREENSHOT02]
   3. Job that failed because of vulnerable packages. [SCREENSHOT03]
@@ -40,8 +40,6 @@ For your submission, please submit the following:
   10. Only deploy on pushed to `master` branch. [SCREENSHOT10]
   11. Provide a screenshot of a graph of your EC2 instance including available memory, available disk space, and CPU usage. [SCREENSHOT11]
   12. Provide a screenshot of an alert that was sent by Prometheus. [SCREENSHOT12]
-
-- Your presentation should be in PDF format named "presentation.pdf" and should be included in your code repository root folder. 
 
 ### Built With
 
