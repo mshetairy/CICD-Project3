@@ -92,7 +92,6 @@ jobs:
     executor: node
     steps:
       - checkout
-      - install_nodejs
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -107,8 +106,11 @@ jobs:
 
   build-backend:
     executor: node
+    # docker:
+    #   - image: circleci/node:13.8.0
     steps:
       - checkout
+      - install_nodejs
       - restore_cache:
           keys: [backend-build]
       - run:
