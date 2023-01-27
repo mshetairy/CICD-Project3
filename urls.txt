@@ -1,5 +1,5 @@
 1. [URL01](https://github.com/mshetairy/CICD-Project3)
-2. [URL02](http://udapeople-3d854ee.s3-website-us-east-1.amazonaws.com)
+2. [URL02](http://udapeople-2501f87.s3-website-us-east-1.amazonaws.com)
 3. [URL03](http://d3cgt9t2ar9fot.cloudfront.net)
 4. [URL04](http://ec2-44-212-162-53.compute-1.amazonaws.com:3030/api/status)
-5. [URL05](http://ec2-52-91-126-193.compute-1.amazonaws.com:9090/)
+5. [URL05](http://34.229.137.202:9090/)
